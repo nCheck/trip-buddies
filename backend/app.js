@@ -21,11 +21,11 @@ app.use('/public', express.static(dir + '/public'));
 
 
 // Require Routes
-var apiRoute = require('./route/api');
-var indexRoute = require('./route/index')
+// var apiRoute = require('./route/api');
+// var indexRoute = require('./route/index')
 
-app.use('/api', apiRoute)
-app.use('/' , indexRoute )
+// app.use('/api', apiRoute)
+// app.use('/' , indexRoute )
 
 
 app.listen(port , function () {

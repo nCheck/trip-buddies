@@ -2,19 +2,19 @@ const express     =   require('express');
 const router      =   express.Router();
 
 
-const customerCtrl = require('../controller/customer');
+const userCtrl = require('../controller/user');
 
 
-router.route('/customer')
-    .get( customerCtrl.getAllCustomer )
-    .post( customerCtrl.addCustomer )
+router.route('/user')
+    .get( userCtrl.getAllUser )
+    .post( userCtrl.addUser )
 
 router.route('/customer/:customerId')
-    .get( customerCtrl.getCustomer )
-    .post( customerCtrl.updateCustomer )
+    .get( userCtrl.getUser )
+    .post( userCtrl.updateUser )
 
 router.route('/customer/:customerId/delete')
-    .get( customerCtrl.deleteCustomer )
+    .get( userCtrl.deleteUser )
 
 
 /*

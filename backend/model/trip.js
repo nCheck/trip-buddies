@@ -21,7 +21,12 @@ var tripSchema = new Schema({
         default : Date.now()
     } ,
     buddies : [ { type : String } ],
-    bills : [{type : Schema.Types.ObjectId, ref: 'Bill'}]
+    bills : [{type : Schema.Types.ObjectId, ref: 'Bill'}],
+    budget : {
+        type : Number,
+        default : 1000
+    },
+    contrib : [ { name : { type : String } , amount : { type : Number , default : 0 } } ]
 
 });
 

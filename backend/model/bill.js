@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema
 
 
-var tripSchema = new Schema({
+var billSchema = new Schema({
     
     reason : {
         type : String,
@@ -18,4 +18,4 @@ var tripSchema = new Schema({
 
 
 
-module.exports = mongoose.model('Trip' , tripSchema);
+module.exports = mongoose.model('Bill' , billSchema);
