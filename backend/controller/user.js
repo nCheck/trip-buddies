@@ -60,6 +60,21 @@ module.exports.getAllUser = ( req , res ) =>{
 
 };
 
+module.exports.getAllUsernames = ( req , res ) =>{
+
+    User.find( {} , { name : true , username : true } , (err , doc) =>{
+
+        if (err){
+            res.send({ status : "error" , data : err });
+        }
+        else{
+            res.send( { status : "success" , data : doc } );
+        }
+
+    } );
+
+};
+
 module.exports.acceptRequest = ( req , res )=>{
 
     var username = req.params.username;

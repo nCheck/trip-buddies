@@ -13,12 +13,14 @@ router.route('/user')
     .get( userCtrl.getAllUser )
     .post( userCtrl.addUser );
 
+router.route('/user/usernames')
+.get( userCtrl.getAllUsernames );
+
 router.route('/user/:username')
     .get( userCtrl.getUser );
 
 router.route('/user/:username/:tripid')
     .get( userCtrl.acceptRequest );
-
 
 // bill apis
 
