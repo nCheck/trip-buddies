@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 	
 mongoose.connect(database , { useNewUrlParser: true });
 mongoose.connection.on('connected' , () =>{
-	console.log('connected')
+	console.log('connected');
 });
 
 require('./bill');

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-
+const Bill = mongoose.model('Bill');
+const Trip = mongoose.model('Trip');
 
 
 module.exports.addUser = (req , res) =>{
@@ -22,9 +23,9 @@ module.exports.addUser = (req , res) =>{
             res.send( { status : "success" , data : doc } );
         }
         
-    })
+    });
 
-}
+};
 
 
 module.exports.getUser = ( req , res ) =>{
@@ -40,9 +41,9 @@ module.exports.getUser = ( req , res ) =>{
             res.send( { status : "success" , data : doc } );
         }
 
-    } )
+    } );
 
-}
+};
 
 module.exports.getAllUser = ( req , res ) =>{
 
@@ -55,6 +56,17 @@ module.exports.getAllUser = ( req , res ) =>{
             res.send( { status : "success" , data : doc } );
         }
 
-    } )
+    } );
 
-}
+};
+
+module.exports.acceptRequest = ( req , res )=>{
+
+    var username = req.params.username;
+    var tripid = req.params.tripid;
+
+    User.updateOne({username} , { $push : { trips  : tripid } , $pull : { requests : tripid } })
+        .then( (doc)=>{ res.send( { status : "success" , data : doc } ); } )
+        .catch( (err) => { res.send({ status : "error" , data : err }); } );
+
+};

@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 
 
 var billSchema = new Schema({
     
-    reason : {
+    product : {
         type : String,
         default : "Petrol"
     } ,

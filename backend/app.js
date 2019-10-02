@@ -21,10 +21,10 @@ app.use('/public', express.static(dir + '/public'));
 
 
 // Require Routes
-// var apiRoute = require('./route/api');
+var apiRoute = require('./route/api');
 // var indexRoute = require('./route/index')
 
-// app.use('/api', apiRoute)
+app.use('/api', apiRoute);
 // app.use('/' , indexRoute )
 
 

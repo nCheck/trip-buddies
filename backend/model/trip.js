@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 
 
 var tripSchema = new Schema({
@@ -21,6 +21,9 @@ var tripSchema = new Schema({
         default : Date.now()
     } ,
     buddies : [ { type : String } ],
+    drive_url:{
+        type:String,
+    },
     bills : [{type : Schema.Types.ObjectId, ref: 'Bill'}],
     budget : {
         type : Number,

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 
 
 var userSchema = new Schema({
@@ -13,6 +13,10 @@ var userSchema = new Schema({
         type : String,
         default : "Gaurav Rai"
     } ,
+    password:{
+        type:String,
+        required:true
+    },
     trips : [{type : Schema.Types.ObjectId, ref: 'Trip'}],
     requests : [{type : Schema.Types.ObjectId, ref: 'Trip'}]
 
