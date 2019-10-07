@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {  View,ScrollView  } from 'react-native'
 var t = require('tcomb-form-native');
-import { withNavigation } from 'react-navigation';
-
+import moment from 'moment'
 import {Button,Text} from 'native-base'
+
 var Form = t.form.Form;
  var trip=t.struct({
 
@@ -20,27 +20,58 @@ var Form = t.form.Form;
      name:"Lakhan",
      location:"Bhutan",
      buddies:["KJo","BJo"],
+    startDate:new Date("2014-05-22"),
+    endDate: new  Date("2014-05-25"),
      budget:20
  }
- 
+
 export default class newtrip extends Component {
+    
+    state={
+        selectedItems:[],
+        friends:[
+                "ABC",
+                "CDE",
+                "XYZ",
+                "Q",
+                "PQR",
+                "J"
+
+        ]
+    }
+    onSelectedItemsChange = selectedItems => {
+        this.setState({ selectedItems });
+      };
     Submit=()=>{
    
             const value=this.refs.form.getValue()
             console.log("sd",value)
-       
+            this.props.navigation.navigate('DisplayTrip',{i:value})
          }
     options={
         fields:{
             startDate:{
                 label:"Start Date",
                 mode:'date',
+                config: {
+                    format: (date) => {
+                      return moment(date).format('DD-MM-YYYY');
+                    },
+                
+               
+                },
             
             },
             endDate:{
                     label:"End Date",
-                    mode:'date'
-                   
+                    mode:'date',
+                    config: {
+                        format: (date) => {
+                          return moment(date).format('DD-MM-YYYY');
+                        },
+                    
+                
+                    },
                 },
             buddies:{
                 label:"Add friends" 
@@ -50,6 +81,7 @@ export default class newtrip extends Component {
         }
     }
     render() {
+        const {selectedItems}=this.state
         return (
             <ScrollView>
                 <Form
@@ -58,6 +90,7 @@ export default class newtrip extends Component {
                 type={trip}
                 value={values}
                 />
+                  
                  <Button    rounded light style={{justifyContent:'center'}}  onPress={this.Submit} underlayColor='yellow'>
           <Text  >Save</Text>
         </Button >

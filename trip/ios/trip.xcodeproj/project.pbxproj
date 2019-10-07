@@ -60,6 +60,7 @@
 		F97A5B6E93F04748995227CF /* Caladea-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F303AA3795DF43808965FA70 /* Caladea-BoldItalic.ttf */; };
 		915491BFEACB4F42B48D4E63 /* Caladea-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05BAA26D802C47B6B033CD04 /* Caladea-Italic.ttf */; };
 		35E858204F964A938E1CBA56 /* Caladea-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB9CCC6926324B8C9D575D42 /* Caladea-Regular.ttf */; };
+		955518A28CEF42E488CB7C47 /* WILLG___.TTF in Resources */ = {isa = PBXBuildFile; fileRef = FC80F830DD5241418157ED7A /* WILLG___.TTF */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		F303AA3795DF43808965FA70 /* Caladea-BoldItalic.ttf */ = {isa = PBXFileReference; name = "Caladea-BoldItalic.ttf"; path = "../fonts/Caladea-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		05BAA26D802C47B6B033CD04 /* Caladea-Italic.ttf */ = {isa = PBXFileReference; name = "Caladea-Italic.ttf"; path = "../fonts/Caladea-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		AB9CCC6926324B8C9D575D42 /* Caladea-Regular.ttf */ = {isa = PBXFileReference; name = "Caladea-Regular.ttf"; path = "../fonts/Caladea-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FC80F830DD5241418157ED7A /* WILLG___.TTF */ = {isa = PBXFileReference; name = "WILLG___.TTF"; path = "../fonts/WILLG___.TTF"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +297,7 @@
 				F303AA3795DF43808965FA70 /* Caladea-BoldItalic.ttf */,
 				05BAA26D802C47B6B033CD04 /* Caladea-Italic.ttf */,
 				AB9CCC6926324B8C9D575D42 /* Caladea-Regular.ttf */,
+				FC80F830DD5241418157ED7A /* WILLG___.TTF */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				F97A5B6E93F04748995227CF /* Caladea-BoldItalic.ttf in Resources */,
 				915491BFEACB4F42B48D4E63 /* Caladea-Italic.ttf in Resources */,
 				35E858204F964A938E1CBA56 /* Caladea-Regular.ttf in Resources */,
+				955518A28CEF42E488CB7C47 /* WILLG___.TTF in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

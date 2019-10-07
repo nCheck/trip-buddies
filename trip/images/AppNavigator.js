@@ -9,9 +9,9 @@ import Headerr from '../components/Headerr'
 import Activity from '../components/Activity'
 import newtrip from "../components/newtrip"
 import myTrips from '../components/myTrips';
-import SideBar from '../components/SideBar'
 import {createDrawerNavigator} from 'react-navigation-drawer'
 import Drawer from '../components/Drawer'
+import DisplayTrip from '../components/DisplayTrip'
 const a=createDrawerNavigator({
   Home:home,
   Trip:{
@@ -33,7 +33,12 @@ navigationOptions:{
 navigationOptions:{
   drawerLabel:()=>null
 }
-
+},
+DisplayTrip:{
+  screen:DisplayTrip,
+navigationOptions:{
+  drawerLabel:()=>null
+}
 },
 },
 {
@@ -50,6 +55,7 @@ const AppNavigator = createStackNavigator(
     Activity:Activity,
     Newtrip:newtrip,
           Notrip:myTrips,
+    DisplayTrip:DisplayTrip
 },
     // {
     //     defaultNavigationOptions: {

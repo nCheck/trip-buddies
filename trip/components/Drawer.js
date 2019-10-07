@@ -13,6 +13,7 @@ const Drawer = props=>(
                 {...props}
          activeBackgroundColor={'black'}
          activeTintColor={'#fad369'}
+         
 /> 
             </View>
     

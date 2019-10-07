@@ -69,7 +69,7 @@ budget:1000
 export default class App extends Component {
   render(){
   return(
-  <AppNavigator screenProps={{trips:trips}} navigation={this.props.navigation}/>
+  <AppNavigator screenProps={{trips:trips}} />
   );
 }
 };
