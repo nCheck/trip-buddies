@@ -18,6 +18,10 @@ export default class Activity extends Component {
               <Label>Money spent</Label>
               <Input />
             </Item>
+            <View style={styles.co}>
+<Text style={styles.text}>Name </Text> 
+<Text style={styles.text} >Contribution</Text>
+            </View>
             <FlatList 
               numColumns={1}
               data = {this.state.friends}
@@ -42,6 +46,10 @@ export default class Activity extends Component {
 const styles=StyleSheet.create({
   co:{
     flexDirection:'row',
-    width:'50%'
+    width:'75%'
+  },
+  text:{
+    width:'50%',
+    fontSize:20
   }
 })
