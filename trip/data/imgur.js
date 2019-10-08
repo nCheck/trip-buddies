@@ -1,0 +1,1 @@
+module.exports = "https://plantbeforum.herokuapp.com/upload"

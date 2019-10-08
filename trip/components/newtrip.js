@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import {  View,ScrollView,Picker, StyleSheet,Text ,FlatList ,TouchableOpacity,TextInput,SafeAreaView} from 'react-native';
+import {  View,ScrollView,Picker, StyleSheet ,Image ,Text,TextInput,TouchableOpacity,FlatList} from 'react-native';
 var t = require('tcomb-form-native');
 import ImagePicker from "react-native-image-picker";
 import moment from 'moment';
+import axios from 'axios'
+import IP from '../data/ip';
+import IMGUR from '../data/imgur';
+
 import {Button,Card,CardItem,Thumbnail,Right,Body} from 'native-base';
 var Form = t.form.Form;
  var trip=t.struct({
@@ -28,42 +32,104 @@ var Form = t.form.Form;
 
 export default class newtrip extends Component {
     
-    state={
-        language:'',
-        selectedItems:[],
-        friends:[
-                "ABC",
-                "CDE",
-                "XYZ",
-                "Q",
-                "PQR",
-                "J"
+    constructor(props){
+        super(props);
+        this.state={
+            language:'',
+            selectedItems:[],
+            drive_url:"",
+            img_url:"",
+            uri : false,
+            friends:[
+                    "ABC",
+                    "CDE",
+                    "XYZ",
+                    "Q",
+                    "PQR",
+                    "J"
+    
+            ],
+            newFriend:""
 
-        ],
-        newFriend:""
-    };
+        }
+        this.getPhotos = this.getPhotos.bind(this);
+    }
+
+        
+
          
     onSelectedItemsChange = selectedItems => {
         this.setState({ selectedItems });
       };
     
+    async componentWillMount(){
+
+        try {
+            const granted = await PermissionsAndroid.request(
+              PermissionsAndroid.PERMISSIONS.CAMERA,
+              {
+                title: 'Cool Photo App Camera Permission',
+                message:
+                  'Cool Photo App needs access to your camera ' +
+                  'so you can take awesome pictures.',
+                buttonNeutral: 'Ask Me Later',
+                buttonNegative: 'Cancel',
+                buttonPositive: 'OK',
+              },
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+              console.log('You can use the camera');
+            } else {
+              console.log('Camera permission denied');
+            }
+          } catch (err) {
+            console.warn(err);
+          }
+
+    }
+
     getPhotos = async () => {
-        ImagePicker.showImagePicker({}, response => {
-            var fd = new FormData();
+        var ts = this;
+        try {
 
-            fd.append("image", {
-            uri: response.uri,
-            type: "image/jpeg",
-            name: response.fileName
+            ImagePicker.showImagePicker({}, response => {
+                var fd = new FormData();
+                var uri = response.uri;
+                fd.append("file", {
+                uri: response.uri,
+                type: "image/jpeg",
+                name: response.fileName
+                });
+                console.log(response)
+                axios({
+                    method: "post",
+                    url: IMGUR,
+                    data: fd,
+                    config: { headers: { "content-type": "multipart/form-data" } }
+                  })
+                    .then(function(response) {
+                      //handle success
+                      var img_url = response.data.link;
+                      console.log("[DATA]", img_url);
+                      ts.setState({img_url,uri});
+                      console.info("STATE", ts.state);
+        
+                    })
+                    .catch(function(response) {
+                      //handle error
+                      console.log("[RESPONSE: ]", response);
+        
+                    });
+    
+    
+    
+                
             });
 
-            this.setState({
-            path : response.path,
-            uri : response.uri,
-            fd
-            });
-            
-        });
+        }
+        catch (err){
+            console.error(err);
+        }
     };
 
     Submit=()=>{
@@ -89,7 +155,7 @@ export default class newtrip extends Component {
             endDate:{
                     label:"End Date",
                     mode:'date',
-                    config: {
+                    config: {    
                         format: (date) => {
                           return moment(date).format('DD-MM-YYYY');
                         },
@@ -125,8 +191,16 @@ export default class newtrip extends Component {
                     type={trip}
                     value={values}
                     />
-                                           <Text style={{fontSize:16}}>Add your friends</Text>
-
+                    <Button    rounded style={{justifyContent:'center'}} color='#5cc6ff'  onPress={this.getPhotos} >
+                        <Text >Select Cover Image</Text>
+                    </Button >
+                    {
+                        this.state.uri != false &&
+                        <Image style={{margin:10, alignContent : 'center' , width: 300, height: 300 }}
+                                source={{ uri : this.state.uri }}
+                        />
+                    }                    
+          <Text style={styles.text}>Add your friends</Text>
                     <FlatList
                     data={this.state.friends}
                     keyExtractor={(item, index) => index}
@@ -161,8 +235,8 @@ export default class newtrip extends Component {
             
         )
     }
-}
 
+}
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -174,6 +248,7 @@ const styles = StyleSheet.create({
         fontSize:16,
         color:'black',
         alignSelf:'center',
+        margin:10
         
     },
     cardItem:{

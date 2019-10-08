@@ -67,9 +67,21 @@ const a=createDrawerNavigator({
       drawerLabel:()=>null
     }
   },
-  Login : { screen : LoginView },
-  Home:home,
-  Register : { screen : SignUpView },
+  Login : { screen : LoginView,
+  navigationOptions:{
+    drawerIcon:<Icon type="FontAwesome" name="sign-in" style={{color:"red"}}/>
+  } },
+  Home:{screen:home,
+  navigationOptions:{
+    drawerLabel:"Recommendations",
+    drawerIcon:<Icon type="Entypo" name="tripadvisor" style={{color:'red',width:'100%'}} />,
+
+  }},
+  Register : { screen : SignUpView,
+  navigationOptions:{
+ drawerIcon:<Icon type="FontAwesome5" name="registered" style={{color:'red'}} />,
+
+  } },
   MyTrips:{
     screen:myTrips,
     navigationOptions:{
@@ -98,7 +110,12 @@ navigationOptions:{
 }
 },
 Request:{
-  screen:Request
+  screen:Request,
+  navigationOptions:{
+    drawerLabel:'Trip requests',
+    
+    drawerIcon:<Icon type="FontAwesome5" name="place-of-worship"style={{color:'red'}} />
+  }
 }
 },
 {
