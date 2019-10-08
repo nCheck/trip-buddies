@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  View,ScrollView  } from 'react-native';
+import {  View,ScrollView,Picker  } from 'react-native';
 var t = require('tcomb-form-native');
 import moment from 'moment';
 import {Button,Text} from 'native-base';
@@ -84,6 +84,15 @@ export default class newtrip extends Component {
         const {selectedItems}=this.state;
         return (
             <ScrollView>
+                  <Picker
+  selectedValue={this.state.language}
+  style={{height: 50, width: 100}}
+  onValueChange={(itemValue, itemIndex) =>
+    this.setState({language: itemValue})
+  }>
+  <Picker.Item label="Java" value="java" />
+  <Picker.Item label="JavaScript" value="js" />
+</Picker>
                 <Form
                 ref="form"
                 options={this.options}
@@ -94,7 +103,9 @@ export default class newtrip extends Component {
                  <Button    rounded light style={{justifyContent:'center'}}  onPress={this.Submit} underlayColor='yellow'>
           <Text  >Save</Text>
         </Button >
+      
             </ScrollView>
+            
         )
     }
 }
