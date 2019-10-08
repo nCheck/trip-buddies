@@ -16,13 +16,16 @@ import LoginView from '../components/Login';
 import SignUpView from '../components/Register';
 import Request from '../components/Request'
 const AppNavigator = createStackNavigator(
-    {   Home:{screen:home},
+    {  
+      
+      Newtrip:newtrip,
+
+      Home:{screen:home},
 
   Login : { screen : LoginView },
   Register : { screen : SignUpView },
     FriendTrips:friendTrips,
     Activity:Activity,
-    Newtrip:newtrip,
     MyTrips:myTrips,
     DisplayTrip:DisplayTrip,
     Request:Request
