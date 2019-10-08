@@ -1,1 +1,1 @@
-module.exports = "http://192.168.1.106:9966/api";
+module.exports = "https://tripbuddybck.herokuapp.com/api";
