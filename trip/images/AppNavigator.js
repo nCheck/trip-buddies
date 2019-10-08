@@ -14,17 +14,18 @@ import Drawer from '../components/Drawer'
 import DisplayTrip from '../components/DisplayTrip'
 import LoginView from '../components/Login';
 import SignUpView from '../components/Register';
-
+import Request from '../components/Request'
 const AppNavigator = createStackNavigator(
     {   Home:{screen:home},
 
   Login : { screen : LoginView },
   Register : { screen : SignUpView },
-    friendTrips:friendTrips,
+    FriendTrips:friendTrips,
     Activity:Activity,
     Newtrip:newtrip,
-          Notrip:myTrips,
-    DisplayTrip:DisplayTrip
+    MyTrips:myTrips,
+    DisplayTrip:DisplayTrip,
+    Request:Request
 },
     // {
     //     defaultNavigationOptions: {
@@ -66,7 +67,7 @@ const a=createDrawerNavigator({
   Login : { screen : LoginView },
   Home:home,
   Register : { screen : SignUpView },
-  Trip:{
+  MyTrips:{
     screen:myTrips,
     navigationOptions:{
       drawerIcon:<Icon type="AntDesign" name="tago" style={{color:'red'}} />,
@@ -74,13 +75,14 @@ const a=createDrawerNavigator({
     }
 
   },
-  AddTrip:{
+  Newtrip:{
 screen:newtrip,
 navigationOptions:{
+  drawerLabel:"Add trip",
   drawerIcon:<Icon type="MaterialIcons" name="add-circle"style={{color:'red'}} />
 },
   },
-  friendTrips:{
+  FriendTrips:{
     screen:friendTrips,
 navigationOptions:{
   drawerLabel:()=>null
@@ -92,6 +94,9 @@ navigationOptions:{
   drawerLabel:()=>null
 }
 },
+Request:{
+  screen:Request
+}
 },
 {
   drawerBackgroundColor:'#f0f0e9',
