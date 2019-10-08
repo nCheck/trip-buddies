@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
-import {  View,StyleSheet,Image ,Dimensions,ImageBackground,FlatList,TouchableOpacity} from 'react-native'
+import React, { Component } from 'react';
+import {  View,StyleSheet,Image ,Dimensions,ImageBackground,FlatList,TouchableOpacity} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Text, Body, Accordion, Button,Icon} from 'native-base';
-var {height,width}=Dimensions.get('window')
+var {height,width}=Dimensions.get('window');
 import moment from 'moment';
 import Modal from "react-native-modal";
 
 export default class DisplayTrip extends Component {
     constructor(props){
-        super(props)
-        this._renderComponent=this._renderComponent.bind(this)
+        super(props);
+        this._renderComponent=this._renderComponent.bind(this);;
     }
 
     showForm(s){
-        this.setState({modalvisible:false})
-       this.props.navigation.navigate("Activity",{act:s,i:this.state.i})        
-        console.log("form click ")
+        this.setState({modalvisible:false});
+       this.props.navigation.navigate("Activity",{act:s,i:this.state.i}) ;       
+        console.log("form click ");
         }
     state={
         modalvisible:false,
@@ -63,22 +63,22 @@ export default class DisplayTrip extends Component {
         i:{}
     }
     componentWillMount(){
-        var tasks=[]
-        var i=this.props.navigation.getParam('i')
-        this.setState({i})
-        var d=moment(i.startDate,"DD")
-        d=parseInt(d.format("DD"))
-        var e=moment(i.endDate,"DD-MM-YYY").subtract(d ,'d')
-        var d1=parseInt(e.format("DD"))
+        var tasks=[];
+        var i=this.props.navigation.getParam('i');
+        this.setState({i});
+        var d=moment(i.startDate,"DD");
+        d=parseInt(d.format("DD"));
+        var e=moment(i.endDate,"DD-MM-YYY").subtract(d ,'d');
+        var d1=parseInt(e.format("DD"));
         var j;
         for (j=1;j<=d1;j++){
-            tasks.push({title:'Day '+j,content:"Add a task"})
+            tasks.push({title:'Day '+j,content:"Add a task"});
         }
-        this.setState({tasks})
+        this.setState({tasks});
     }
     
     _renderComponent(item){
-        console.log("Came here")
+        console.log("Came here");
 
         return(
             <Button onPress={()=>this.setState({modalvisible:true}) } >

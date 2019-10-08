@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import {  View,FlatList ,Image} from 'react-native'
+import React, { Component } from 'react';
+import {  View,FlatList ,Image} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
-import AppNavigator from './images/AppNavigator'
+import AppNavigator from './images/AppNavigator';
 export default class home extends Component {
 
   start(s){
-    console.log(s)
+    console.log(s);
       if(s){
       return(
             <FlatList 

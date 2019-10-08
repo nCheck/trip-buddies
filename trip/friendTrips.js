@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { Button,Text, View ,FlatList,TouchableOpacity ,} from 'react-native'
+import React, { Component } from 'react';
+import { Button,Text, View ,FlatList,TouchableOpacity ,} from 'react-native';
 var t = require('tcomb-form-native');
 import { Container, Header, Content, Card, CardItem, Thumbnail, Icon, Left, Body, Right } from 'native-base';
 import Modal from "react-native-modal";
-import withNavigation from 'react-navigation'
+import withNavigation from 'react-navigation';
 
 class friendTrips extends Component {
     state={
@@ -56,15 +56,15 @@ class friendTrips extends Component {
     }
 
    showForm(s){
-    this.setState({modalvisible:false})
-   this.props.navigation.navigate("Newtrip  ",{act:s})        
-    console.log("form click ")
+    this.setState({modalvisible:false});
+   this.props.navigation.navigate("Newtrip  ",{act:s});        
+    console.log("form click ");
     }
 
     render() {
         
-        const {navigation}=this.props
-        const i =navigation.getParam('i')
+        const {navigation}=this.props;
+        const i =navigation.getParam('i');
         return(
             <View>
                 
@@ -117,4 +117,4 @@ class friendTrips extends Component {
     } 
 }
 
-export default friendTrips
+export default friendTrips;

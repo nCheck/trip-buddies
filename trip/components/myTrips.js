@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { View,Image,Dimensions ,StyleSheet} from 'react-native'
-import{Card ,CardItem,Container,Body,Header,Subtitle,Title,Button,Text} from 'native-base'
-import Carousel from 'react-native-snap-carousel'
-import {ENTRIES1} from '../data/imglist'
+import React, { Component } from 'react';
+import { View,Image,Dimensions ,StyleSheet} from 'react-native';
+import{Card ,CardItem,Container,Body,Header,Subtitle,Title,Button,Text} from 'native-base';
+import Carousel from 'react-native-snap-carousel';
+import {ENTRIES1} from '../data/imglist';
 import { withNavigation } from 'react-navigation';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');

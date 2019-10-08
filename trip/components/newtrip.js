@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import {  View,ScrollView  } from 'react-native'
+import React, { Component } from 'react';
+import {  View,ScrollView  } from 'react-native';
 var t = require('tcomb-form-native');
-import moment from 'moment'
-import {Button,Text} from 'native-base'
+import moment from 'moment';
+import {Button,Text} from 'native-base';
 
 var Form = t.form.Form;
  var trip=t.struct({
@@ -14,7 +14,7 @@ var Form = t.form.Form;
     endDate:t.Date,   
     buddies : t.list(t.String) ,
     budget : t.Number
- })
+ });
 
  var values={
      name:"Lakhan",
@@ -23,7 +23,7 @@ var Form = t.form.Form;
     startDate:new Date("2014-05-22"),
     endDate: new  Date("2014-05-25"),
      budget:20
- }
+ };
 
 export default class newtrip extends Component {
     
@@ -81,7 +81,7 @@ export default class newtrip extends Component {
         }
     }
     render() {
-        const {selectedItems}=this.state
+        const {selectedItems}=this.state;
         return (
             <ScrollView>
                 <Form

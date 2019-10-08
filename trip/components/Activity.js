@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Text, View,FlatList,StyleSheet } from 'react-native'
-import { Content,Form,Item,Input,Label } from 'native-base'
+import React, { Component } from 'react';
+import { Text, View,FlatList,StyleSheet } from 'react-native';
+import { Content,Form,Item,Input,Label } from 'native-base';
 
 export default class Activity extends Component {
 
@@ -8,7 +8,7 @@ export default class Activity extends Component {
     friends:this.props.navigation.getParam('i').buddies
   }
     render() {
-        var act=this.props.navigation.getParam('act')
+        var act=this.props.navigation.getParam('act');
 
         return (
             <Content>
