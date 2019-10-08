@@ -8,8 +8,11 @@ import {
   TouchableHighlight,
   Image,
   Alert,
-  ImageBackground
+  ImageBackground,
+  AsyncStorage
 } from 'react-native';
+import axios from 'axios'
+import IP from '../data/ip';
 const backimg = "https://wallpaperaccess.com/full/191948.jpg";
 
 export default class LoginView extends Component {
@@ -22,10 +25,22 @@ export default class LoginView extends Component {
     }
   }
 
-  onClickListener = (viewId) => {
+  onClickListener = async (viewId) => {
 
     if ( viewId == 'login' ){
-      this.props.navigation.navigate('Home');
+      axios.get(IP+`/verify/${ this.state.username }/${ this.state.password }`)
+        .then( async (res) =>{
+          console.log("response", res.data);
+          if ( res.data.status == true ){
+            await AsyncStorage.setItem('user' ,  JSON.stringify( res.data.data ) );
+            this.props.navigation.navigate('Home');
+          }
+          else{
+            Alert.alert('Invalid Password',"Please enter correct details");
+          }
+        })
+        .catch(err => console.log("[ERROR]",err));
+      
     }
     else if ( viewId == 'register' ){
       this.props.navigation.navigate('Register');
@@ -57,7 +72,7 @@ export default class LoginView extends Component {
         <TouchableHighlight style={[styles.buttonContainer]} onPress={() => this.onClickListener('login')}>
           <Text>Login</Text>
         </TouchableHighlight>
-        
+
         <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('register')}>
             <Text>Register</Text>
         </TouchableHighlight>

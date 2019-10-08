@@ -1,1 +1,1 @@
-module.exports = "";
+module.exports = "https://tripbuddybck.herokuapp.com/api";

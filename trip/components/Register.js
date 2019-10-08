@@ -8,8 +8,11 @@ import {
   TouchableHighlight,
   Image,
   Alert,
-  ImageBackground
+  ImageBackground,
+  AsyncStorage
 } from 'react-native';
+import axios from 'axios'
+import IP from '../data/ip';
 const backimg = "http://theiphonewalls.com/wp-content/uploads/2016/12/waterfall.jpg";
 
 export default class SignUpView extends Component {
@@ -23,8 +26,19 @@ export default class SignUpView extends Component {
     }
   }
 
-  onClickListener = (viewId) => {
-    Alert.alert("Alert", "Button pressed "+viewId);
+  onClickListener = async (viewId) => {
+    if ( viewId == 'sign_up' ){
+      var data = {
+        name : this.state.fullName, username : this.state.username , password : this.state.password
+      }
+      axios.post( IP + '/user' , data )
+        .then( async (res) => { 
+          console.log("registered: ", res.data.data);
+          await AsyncStorage.setItem('user' , JSON.stringify(res.data.data));
+          this.props.navigation.navigate('Home');
+        })
+        .catch( err => Alert("Error", err) ); 
+    }
   }
 
   render() {
