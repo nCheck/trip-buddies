@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {  View,ScrollView,Picker  } from 'react-native';
+import {  View,ScrollView,Picker, StyleSheet  } from 'react-native';
 var t = require('tcomb-form-native');
+import ImagePicker from "react-native-image-picker";
 import moment from 'moment';
 import {Button,Text} from 'native-base';
 
@@ -9,7 +10,8 @@ var Form = t.form.Form;
 
     name : t. String,
     location : t.String,
-     
+    drive_url : t.String,
+    img_url : t.String,
     startDate : t.Date,
     endDate:t.Date,   
     buddies : t.list(t.String) ,
@@ -17,12 +19,14 @@ var Form = t.form.Form;
  });
 
  var values={
-     name:"Lakhan",
-     location:"Bhutan",
-     buddies:["KJo","BJo"],
-    startDate:new Date("2014-05-22"),
-    endDate: new  Date("2014-05-25"),
-     budget:20
+    name:"Lakhan",
+    location:"Bhutan",
+    buddies:["KJo","BJo"],
+    drive_url:"",
+    img_url:"",
+    startDate:new Date("2018-05-22"),
+    endDate: new Date("2018-05-25"),
+    budget:2000
  };
 
 export default class newtrip extends Component {
@@ -43,6 +47,26 @@ export default class newtrip extends Component {
     onSelectedItemsChange = selectedItems => {
         this.setState({ selectedItems });
       };
+    
+    getPhotos = async () => {
+        ImagePicker.showImagePicker({}, response => {
+            var fd = new FormData();
+
+            fd.append("image", {
+            uri: response.uri,
+            type: "image/jpeg",
+            name: response.fileName
+            });
+
+            this.setState({
+            path : response.path,
+            uri : response.uri,
+            fd
+            });
+            
+        });
+    };
+
     Submit=()=>{
    
             const value=this.refs.form.getValue()
@@ -84,22 +108,30 @@ export default class newtrip extends Component {
     render() {
         const {selectedItems}=this.state;
         return (
-            <ScrollView>
-    
-                <Form
-                ref="form"
-                options={this.options}
-                type={trip}
-                value={values}
-                />
-                  
-                 <Button    rounded light style={{justifyContent:'center'}}  onPress={this.Submit} underlayColor='yellow'>
-          <Text  >Save</Text>
-        </Button >
-      
-            </ScrollView>
+            <View style={styles.container}>
+                <ScrollView>
+                    
+                    <Form
+                    ref="form"
+                    options={this.options}
+                    type={trip}
+                    value={values}
+                    />
+                    
+                    <Button    rounded light style={{justifyContent:'center'}}  onPress={this.Submit} underlayColor='yellow'>
+                        <Text >Save</Text>
+                    </Button >
+                </ScrollView>
+            </View>
             
         )
     }
 }
 
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      margin : 20
+    }
+});
