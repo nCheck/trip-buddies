@@ -12,8 +12,13 @@ import myTrips from '../components/myTrips';
 import {createDrawerNavigator} from 'react-navigation-drawer'
 import Drawer from '../components/Drawer'
 import DisplayTrip from '../components/DisplayTrip'
+import LoginView from '../components/Login';
+import SignUpView from '../components/Register';
+
 const a=createDrawerNavigator({
+  Login : { screen : LoginView },
   Home:home,
+  Register : { screen : SignUpView },
   Trip:{
     screen:myTrips,
     navigationOptions:{
@@ -50,6 +55,8 @@ contentComponent: Drawer
 const AppNavigator = createStackNavigator(
     {
       a:a,
+  Login : { screen : LoginView },
+  Register : { screen : SignUpView },
    Home:{screen:home},
     friendTrips:friendTrips,
     Activity:Activity,
@@ -76,7 +83,7 @@ const AppNavigator = createStackNavigator(
         ),
         headerTitle:<Headerr/>,
       headerStyle:{
-          backgroundColor: '#f4516c',
+          backgroundColor: "#1787ff",
 
       },
         headerTintColor: '#fff',
