@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import {  View,ScrollView,Picker, StyleSheet  } from 'react-native';
+import {  View,ScrollView,Picker, StyleSheet , PermissionsAndroid , Image } from 'react-native';
 var t = require('tcomb-form-native');
 import ImagePicker from "react-native-image-picker";
 import moment from 'moment';
 import {Button,Text} from 'native-base';
+import axios from 'axios'
+import IP from '../data/ip';
+import IMGUR from '../data/imgur';
 
 var Form = t.form.Form;
  var trip=t.struct({
@@ -31,40 +34,99 @@ var Form = t.form.Form;
 
 export default class newtrip extends Component {
     
-    state={
-        language:'',
-        selectedItems:[],
-        friends:[
-                "ABC",
-                "CDE",
-                "XYZ",
-                "Q",
-                "PQR",
-                "J"
-
-        ]
+    constructor(props){
+        super(props);
+        this.state={
+            language:'',
+            selectedItems:[],
+            drive_url:"",
+            img_url:"",
+            uri : false,
+            friends:[
+                    "ABC",
+                    "CDE",
+                    "XYZ",
+                    "Q",
+                    "PQR",
+                    "J"
+    
+            ]
+        }
+        this.getPhotos = this.getPhotos.bind(this);
     }
+
     onSelectedItemsChange = selectedItems => {
         this.setState({ selectedItems });
       };
     
+    async componentWillMount(){
+
+        try {
+            const granted = await PermissionsAndroid.request(
+              PermissionsAndroid.PERMISSIONS.CAMERA,
+              {
+                title: 'Cool Photo App Camera Permission',
+                message:
+                  'Cool Photo App needs access to your camera ' +
+                  'so you can take awesome pictures.',
+                buttonNeutral: 'Ask Me Later',
+                buttonNegative: 'Cancel',
+                buttonPositive: 'OK',
+              },
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+              console.log('You can use the camera');
+            } else {
+              console.log('Camera permission denied');
+            }
+          } catch (err) {
+            console.warn(err);
+          }
+
+    }
+
     getPhotos = async () => {
-        ImagePicker.showImagePicker({}, response => {
-            var fd = new FormData();
+        var ts = this;
+        try {
 
-            fd.append("image", {
-            uri: response.uri,
-            type: "image/jpeg",
-            name: response.fileName
+            ImagePicker.showImagePicker({}, response => {
+                var fd = new FormData();
+                var uri = response.uri;
+                fd.append("file", {
+                uri: response.uri,
+                type: "image/jpeg",
+                name: response.fileName
+                });
+                console.log(response)
+                axios({
+                    method: "post",
+                    url: IMGUR,
+                    data: fd,
+                    config: { headers: { "content-type": "multipart/form-data" } }
+                  })
+                    .then(function(response) {
+                      //handle success
+                      var img_url = response.data.link;
+                      console.log("[DATA]", img_url);
+                      ts.setState({img_url,uri});
+                      console.info("STATE", ts.state);
+        
+                    })
+                    .catch(function(response) {
+                      //handle error
+                      console.log("[RESPONSE: ]", response);
+        
+                    });
+    
+    
+    
+                
             });
 
-            this.setState({
-            path : response.path,
-            uri : response.uri,
-            fd
-            });
-            
-        });
+        }
+        catch (err){
+            console.error(err);
+        }
     };
 
     Submit=()=>{
@@ -117,8 +179,16 @@ export default class newtrip extends Component {
                     type={trip}
                     value={values}
                     />
-                    
-                    <Button    rounded light style={{justifyContent:'center'}}  onPress={this.Submit} underlayColor='yellow'>
+                    <Button    rounded style={{justifyContent:'center'}} color='#5cc6ff'  onPress={this.getPhotos} >
+                        <Text >Select Cover Image</Text>
+                    </Button >
+                    {
+                        this.state.uri != false &&
+                        <Image style={{margin:10, alignContent : 'center' , width: 300, height: 300 }}
+                                source={{ uri : this.state.uri }}
+                        />
+                    }                    
+                    <Button    rounded style={{justifyContent:'center', marginTop : 10}} color='#4dc1ff'  onPress={this.Submit}>
                         <Text >Save</Text>
                     </Button >
                 </ScrollView>
