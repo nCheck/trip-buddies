@@ -17,7 +17,7 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
-import AppNavigator from './images/AppNavigator';
+import A from './images/AppNavigator';
 
 const trips = [
   {name:"Heaven on Earth",
@@ -69,7 +69,7 @@ budget:1000
 export default class App extends Component {
   render(){
   return(
-  <AppNavigator screenProps={{trips:trips}} />
+  <A screenProps={{trips:trips}} />
   );
 }
 };

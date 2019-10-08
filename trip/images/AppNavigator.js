@@ -15,7 +15,54 @@ import DisplayTrip from '../components/DisplayTrip'
 import LoginView from '../components/Login';
 import SignUpView from '../components/Register';
 
+const AppNavigator = createStackNavigator(
+    {   Home:{screen:home},
+
+  Login : { screen : LoginView },
+  Register : { screen : SignUpView },
+    friendTrips:friendTrips,
+    Activity:Activity,
+    Newtrip:newtrip,
+          Notrip:myTrips,
+    DisplayTrip:DisplayTrip
+},
+    // {
+    //     defaultNavigationOptions: {
+    //     headerStyle: {
+    //       backgroundColor: '#f4516c',
+    //     },
+    //     headerTitle:<Headerr/>, 
+    //     headerTintColor: '#fff',
+    //     headerTitleStyle: {
+    //     },
+      
+    //   },},
+  {
+    defaultNavigationOptions: ({navigation}) => {
+      return {
+        headerLeft:( 
+          <Icon type="FontAwesome5" name={"bars"} brand style={{paddingLeft:15 , fontSize: 30, color:'#fad369'}} onPress={() => navigation.toggleDrawer()}/>
+        ),
+        headerTitle:<Headerr/>,
+      headerStyle:{
+        color:'#fad369',
+          backgroundColor: "#1787ff",
+
+      },
+        headerTintColor: '#fff',
+
+      };
+    },    
+  }
+
+);
 const a=createDrawerNavigator({
+  AppNavigator:{
+    screen:AppNavigator,
+    navigationOptions:{
+      drawerLabel:()=>null
+    }
+  },
   Login : { screen : LoginView },
   Home:home,
   Register : { screen : SignUpView },
@@ -52,45 +99,5 @@ contentComponent: Drawer
 
 },
 )
-const AppNavigator = createStackNavigator(
-    {
-      a:a,
-  Login : { screen : LoginView },
-  Register : { screen : SignUpView },
-   Home:{screen:home},
-    friendTrips:friendTrips,
-    Activity:Activity,
-    Newtrip:newtrip,
-          Notrip:myTrips,
-    DisplayTrip:DisplayTrip
-},
-    // {
-    //     defaultNavigationOptions: {
-    //     headerStyle: {
-    //       backgroundColor: '#f4516c',
-    //     },
-    //     headerTitle:<Headerr/>, 
-    //     headerTintColor: '#fff',
-    //     headerTitleStyle: {
-    //     },
-      
-    //   },},
-  {
-    defaultNavigationOptions: ({navigation}) => {
-      return {
-        headerLeft:( 
-          <Icon type="FontAwesome5" name={"bars"} brand style={{paddingLeft:15 , fontSize: 30, color:'#fad369'}} onPress={() => navigation.toggleDrawer()}/>
-        ),
-        headerTitle:<Headerr/>,
-      headerStyle:{
-          backgroundColor: "#1787ff",
 
-      },
-        headerTintColor: '#fff',
-
-      };
-    },    
-  }
-
-);
-export default createAppContainer(AppNavigator)
+export default createAppContainer(a)

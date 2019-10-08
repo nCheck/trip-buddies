@@ -3,7 +3,17 @@ import {  View,FlatList ,Image} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import AppNavigator from './images/AppNavigator';
 export default class home extends Component {
+  static navigationOptions = {
+    headerTitle:"Recommended trips",
+    
+    headerRight:(
+      <Icon onPress={()=>this.listoptions} style={{color:"#fad369"}}  type="MaterialCommunityIcons" name="filter-outline"/>
+    )
+  }
+  listoptions(){
 
+    return(<Text>helloo</Text>)
+  }
   start(s){
     console.log(s);
       if(s){
