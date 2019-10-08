@@ -10,7 +10,7 @@ import {
   Alert,
   ImageBackground
 } from 'react-native';
-const backimg = "https://images.wallpaperscraft.com/image/beach_palm_ocean_127914_168x300.jpg"
+const backimg = "https://wallpaperaccess.com/full/191948.jpg";
 
 export default class LoginView extends Component {
 
@@ -54,14 +54,10 @@ export default class LoginView extends Component {
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onClickListener('login')}>
-          <Text style={styles.loginText}>Login</Text>
+        <TouchableHighlight style={[styles.buttonContainer]} onPress={() => this.onClickListener('login')}>
+          <Text>Login</Text>
         </TouchableHighlight>
-
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('restore_password')}>
-            <Text>Forgot your password?</Text>
-        </TouchableHighlight>
-
+        
         <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('register')}>
             <Text>Register</Text>
         </TouchableHighlight>
@@ -108,6 +104,12 @@ const styles = StyleSheet.create({
     marginBottom:20,
     width:250,
     borderRadius:30,
+    borderWidth : 1.5,
+    borderColor : "#0059b8"
+  },
+  buttonBorder : {
+    borderWidth : 1.5,
+    borderColor : "#0059b8"
   },
   loginButton: {
     backgroundColor: "#00b5ec",
