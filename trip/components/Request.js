@@ -74,7 +74,7 @@ export default class Request extends Component {
                     .then( res => console.info("UPDATE", res.data) )
                     .catch(err => console.error(err));
 
-        axios.get(IP+`/verify/${ this.state.username }/${ this.state.password }`)
+        axios.get(IP+`/reject/${ this.state.username }/${ this.state.password }`)
         .then( async (res) =>{
             console.log("response", res.data);
             if ( res.data.status == true ){

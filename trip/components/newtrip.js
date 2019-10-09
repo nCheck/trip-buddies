@@ -125,16 +125,13 @@ export default class newtrip extends Component {
         }
     };
 
-    Submit= async () => {
+    Submit = async () => {
    
             var userData =  JSON.parse( await AsyncStorage.getItem('user') );
-            console.log("userData",  userData)
             var value=this.refs.form.getValue();
             var data = Object.assign({}, value);
             data.img_url = this.state.img_url;
             data.buddies = this.state.friends;
-            console.log("sd",data)
-            console.log("link", IP+'/trip/'+userData.username );
             axios.post(IP+'/trip/'+userData.username  , data)
               .then(res => {
                 console.info("[SUCCESS]",res.data);
@@ -143,8 +140,8 @@ export default class newtrip extends Component {
               .catch( err =>{
                 console.error("ERROR", err);
               } )
-            // this.props.navigation.navigate('DisplayTrip',{i:value,friends:this.state.friends})
          }
+
     options={
         fields:{
             startDate:{
@@ -192,7 +189,7 @@ export default class newtrip extends Component {
         return (
             <View style={styles.container} >
                 <ScrollView >
-                <Button    rounded style={{justifyContent:'center'}} color='#5cc6ff'  onPress={this.getPhotos} >
+                <Button    rounded style={{justifyContent:'center', margin : 10}} color='#5cc6ff'  onPress={this.getPhotos} >
                         <Text >Select Cover Image</Text>
                     </Button >
                     {
