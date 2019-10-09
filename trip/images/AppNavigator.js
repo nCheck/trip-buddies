@@ -15,15 +15,15 @@ import DisplayTrip from '../components/DisplayTrip'
 import LoginView from '../components/Login';
 import SignUpView from '../components/Register';
 import Request from '../components/Request'
+import MakeMyTrip from '../components/Makemytrip';
 const AppNavigator = createStackNavigator(
     {  
       
+      Login : { screen : LoginView },
       Newtrip:newtrip,
-
       Home:{screen:home},
-
-  Login : { screen : LoginView },
   Register : { screen : SignUpView },
+  MakeMyTrip : { screen : MakeMyTrip },
     FriendTrips:friendTrips,
     Activity:Activity,
     MyTrips:myTrips,

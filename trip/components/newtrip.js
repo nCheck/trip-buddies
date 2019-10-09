@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  View,ScrollView,Picker, StyleSheet ,Image ,Text,TextInput,TouchableOpacity,FlatList} from 'react-native';
+import {  View,ScrollView,Picker, StyleSheet ,Image ,Text,TextInput,TouchableOpacity,FlatList, PermissionsAndroid, AsyncStorage} from 'react-native';
 var t = require('tcomb-form-native');
 import ImagePicker from "react-native-image-picker";
 import moment from 'moment';
@@ -38,25 +38,18 @@ export default class newtrip extends Component {
             language:'',
             selectedItems:[],
             drive_url:"",
-            img_url:"",
+            img_url:"https://media.tacdn.com/media/attractions-splice-spp-674x446/06/75/ba/2d.jpg",
             uri : false,
             friends:[
-                    "ABC",
-                    "CDE",
-                    "XYZ",
-                    "Q",
-                    "PQR",
-                    "J"
-    
             ],
-            newFriend:""
+            newFriend:"",
+            username : ""
 
         }
         this.getPhotos = this.getPhotos.bind(this);
-    }
-
+        this.Submit = this.Submit.bind(this);
         
-
+    }
          
     onSelectedItemsChange = selectedItems => {
         this.setState({ selectedItems });
@@ -132,11 +125,25 @@ export default class newtrip extends Component {
         }
     };
 
-    Submit=()=>{
+    Submit= async () => {
    
-            const value=this.refs.form.getValue()
-            console.log("sd",value)
-            this.props.navigation.navigate('DisplayTrip',{i:value,friends:this.state.friends})
+            var userData =  JSON.parse( await AsyncStorage.getItem('user') );
+            console.log("userData",  userData)
+            var value=this.refs.form.getValue();
+            var data = Object.assign({}, value);
+            data.img_url = this.state.img_url;
+            data.buddies = this.state.friends;
+            console.log("sd",data)
+            console.log("link", IP+'/trip/'+userData.username );
+            axios.post(IP+'/trip/'+userData.username  , data)
+              .then(res => {
+                console.info("[SUCCESS]",res.data);
+                this.props.navigation.navigate('DisplayTrip',{i:value,friends:this.state.friends})
+              })
+              .catch( err =>{
+                console.error("ERROR", err);
+              } )
+            // this.props.navigation.navigate('DisplayTrip',{i:value,friends:this.state.friends})
          }
     options={
         fields:{
@@ -183,15 +190,9 @@ export default class newtrip extends Component {
     render() {
         const {selectedItems}=this.state;
         return (
-                <ScrollView>
-                    
-                    <Form
-                    ref="form"
-                    options={this.options}
-                    type={trip}
-                    value={values}
-                    />
-                    <Button    rounded style={{justifyContent:'center'}} color='#5cc6ff'  onPress={this.getPhotos} >
+            <View style={styles.container} >
+                <ScrollView >
+                <Button    rounded style={{justifyContent:'center'}} color='#5cc6ff'  onPress={this.getPhotos} >
                         <Text >Select Cover Image</Text>
                     </Button >
                     {
@@ -199,7 +200,13 @@ export default class newtrip extends Component {
                         <Image style={{margin:10, alignContent : 'center' , width: 300, height: 300 }}
                                 source={{ uri : this.state.uri }}
                         />
-                    }                    
+                    }     
+                    <Form
+                    ref="form"
+                    options={this.options}
+                    type={trip}
+                    value={values}
+                    />               
           <Text style={styles.text}>Add your friends</Text>
                     <FlatList
                     data={this.state.friends}
@@ -228,10 +235,12 @@ export default class newtrip extends Component {
                         <TextInput value={this.state.newFriend} onChangeText={(value)=>this.setState({newFriend:value})} placeholder="Add friend"/>
 
                        <TouchableOpacity onPress={()=>this.addFriend(this.state.newFriend)} style={styles.button}><Text style={styles.text} >Add friend</Text></TouchableOpacity>
-                    <Button    rounded light style={{justifyContent:'center'}}  onPress={this.Submit} underlayColor='yellow'>
+                    <Button    rounded style={{justifyContent:'center' , marginTop : 10 }}  onPress={this.Submit} underlayColor='yellow'>
                         <Text >Save</Text>
                     </Button >
                 </ScrollView>
+            
+                </View>
             
         )
     }
@@ -241,7 +250,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
-      margin : 20
+      margin : 12
     },
     text:{
         fontFamily:'Roboto_medium',

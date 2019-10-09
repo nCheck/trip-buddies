@@ -33,7 +33,12 @@ export default class LoginView extends Component {
           console.log("response", res.data);
           if ( res.data.status == true ){
             await AsyncStorage.setItem('user' ,  JSON.stringify( res.data.data ) );
-            this.props.navigation.navigate('Home');
+            if ( res.data.data.requests.length > 0 ){
+              this.props.navigation.navigate('Request');
+            }else{
+              this.props.navigation.navigate('Home');
+            }
+            
           }
           else{
             Alert.alert('Invalid Password',"Please enter correct details");

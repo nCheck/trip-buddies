@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View,StyleSheet ,TouchableOpacity, AsyncStorage} from 'react-native';
+import { Text, View,StyleSheet ,TouchableOpacity, AsyncStorage , Alert} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail,  Icon, Left, Body, Right } from 'native-base';
 import axios from 'axios'
 import IP from '../data/ip';
@@ -23,7 +23,10 @@ export default class Request extends Component {
     async componentWillMount(){
         var userData =  JSON.parse( await AsyncStorage.getItem('user') );
         console.log(userData)
-        this.setState({ username : userData.username, password : userData.password , trips : userData.requests })
+        this.setState({ username : userData.username, password : userData.password , trips : userData.requests });
+        var requests = this.state.trips.length;
+        console.log(requests)
+        Alert.alert("Notification", "You have "+ requests.toString() + " pending requests" );
     }
 
     _formatDate = (date)=>{
