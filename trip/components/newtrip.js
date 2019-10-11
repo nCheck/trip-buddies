@@ -43,7 +43,7 @@ export default class newtrip extends Component {
             friends:[
             ],
             newFriend:"",
-            username : ""
+            username : "",
 
         }
         this.getPhotos = this.getPhotos.bind(this);
@@ -176,10 +176,15 @@ export default class newtrip extends Component {
     }
     removeFriend(d){
         var f= this.state.friends;
+        const g=this.state.friends.filter(item=>item.id!=d)
+        console.log("here",g,"sd")
         var c=f.findIndex(a=>a===d);
         console.log(c);
-        delete f[c];
+        f.splice(c,1);
+        console.log(this.state.friends)
         this.setState({friends:f})
+        console.log("after ",this.state.friends)
+
     }
     addFriend(d){
         console.log(d)
@@ -210,6 +215,7 @@ export default class newtrip extends Component {
           <Text style={styles.text}>Add your friends</Text>
                     <FlatList
                     data={this.state.friends}
+                    extraData={this.state}
                     keyExtractor={(item, index) => index}
                     renderItem={i => {
                       return(

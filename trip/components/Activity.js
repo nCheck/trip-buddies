@@ -5,11 +5,13 @@ import { Content,Form,Item,Input,Label } from 'native-base';
 export default class Activity extends Component {
 
   state={
-    friends:this.props.navigation.getParam('i').buddies
+    friends:this.props.navigation.getParam('friends')
   }
+  
+
     render() {
         var act=this.props.navigation.getParam('act');
-
+console.log("frieds ",this.state.friends)
         return (
             <Content>
                 <Text> Form for activiy {act.n}</Text>
@@ -21,6 +23,7 @@ export default class Activity extends Component {
             <View style={styles.co}>
 <Text style={styles.text}>Name </Text> 
 <Text style={styles.text} >Contribution</Text>
+
             </View>
             <FlatList 
               numColumns={1}

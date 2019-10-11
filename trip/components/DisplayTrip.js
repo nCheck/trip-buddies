@@ -10,15 +10,15 @@ export default class DisplayTrip extends Component {
         super(props);
         this._renderComponent=this._renderComponent.bind(this);;
     }
-
     showForm(s){
         this.setState({modalvisible:false});
-       this.props.navigation.navigate("Activity",{act:s,i:this.state.i}) ;       
+       this.props.navigation.navigate("Activity",{act:s,i:this.state.i,friends:this.state.friends}) ;       
         console.log("form click ");
         }
     state={
         modalvisible:false,
         tasks:[],
+        friends:this.props.navigation.getParam('friends'),
         icons:[
             {       
                 n:"Train",
@@ -78,7 +78,7 @@ export default class DisplayTrip extends Component {
     }
     
     _renderComponent(item){
-        console.log("Came here");
+        console.log("Came here",this.state.friends);
 
         return(
             <Button onPress={()=>this.setState({modalvisible:true}) } >
