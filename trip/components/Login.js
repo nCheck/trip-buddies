@@ -13,15 +13,16 @@ import {
 } from 'react-native';
 import axios from 'axios'
 import IP from '../data/ip';
+import {signin} from '../components/Auth'
 const backimg = "https://wallpaperaccess.com/full/191948.jpg";
-
+value="ncheck"
 export default class LoginView extends Component {
 
   constructor(props) {
     super(props);
     state = {
-      username   : '',
-      password: '',
+      username   : 'ncheck',
+      password: 'root',
     }
   }
 
@@ -32,7 +33,7 @@ export default class LoginView extends Component {
         .then( async (res) =>{
           console.log("response", res.data);
           if ( res.data.status == true ){
-            await AsyncStorage.setItem('user' ,  JSON.stringify( res.data.data ) );
+            await signin(JSON.stringify(res.data.data) ) ;
             if ( res.data.data.requests.length > 0 ){
               this.props.navigation.navigate('Request');
             }else{

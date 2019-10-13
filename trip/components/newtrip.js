@@ -6,7 +6,7 @@ import moment from 'moment';
 import axios from 'axios'
 import IP from '../data/ip';
 import IMGUR from '../data/imgur';
-
+import { isSigned}from './Auth'
 import {Button,Card,CardItem,Thumbnail,Right,Body} from 'native-base';
 var Form = t.form.Form;
  var trip=t.struct({
@@ -23,8 +23,8 @@ var Form = t.form.Form;
  var values={
     name:"Lakhan",
     location:"Bhutan",
-    drive_url:"",
-    img_url:"",
+    drive_url:"hh",
+    img_url:"kk",
     startDate:new Date("2018-05-22"),
     endDate: new Date("2018-05-25"),
     budget:2000
@@ -127,7 +127,7 @@ export default class newtrip extends Component {
 
     Submit= async () => {
    
-            var userData =  JSON.parse( await AsyncStorage.getItem('user') );
+            var userData =  JSON.parse( isSigned()  );
             console.log("userData",  userData)
             var value=this.refs.form.getValue();
             var data = Object.assign({}, value);

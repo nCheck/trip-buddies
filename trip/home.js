@@ -14,6 +14,8 @@ constructor(props){
   this.start = {
     places : []
   }
+  console.log("sd")
+
 }
 
   async componentWillMount(){
@@ -55,7 +57,6 @@ constructor(props){
           />)
 
 }
-
   componentDidMount() {
     this.props.navigation.setParams({
         showFiltr: this.showFilter

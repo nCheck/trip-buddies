@@ -17,8 +17,8 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
-import A from './images/AppNavigator';
-
+// import A from './images/AppNavigator';
+import Switcher from './images/AppNavigator'
 const trips = [
   {name:"Heaven on Earth",
     img:require("./images/default.jpg"), 
@@ -70,7 +70,7 @@ console.disableYellowBox=true
 export default class App extends Component {
   render(){
   return(
-  <A screenProps={{trips:trips}} />
+  <Switcher screenProps={{trips:trips}} />
   );
 }
 };
