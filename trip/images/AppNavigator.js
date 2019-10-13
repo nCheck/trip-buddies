@@ -138,9 +138,12 @@ Request:{
     drawerIcon:<Icon type="FontAwesome5" name="place-of-worship"style={{color:'red'}} />
   }
 },
-Logout:Logout
-
-  
+Logout:{
+  screen:Logout,
+  navigationOptions:{
+  drawerIcon:<Icon type="AntDesign" name="logout"  style={{  marginLeft:25,height:40,width:50 ,color:'red'}}/>
+}
+}  
 },
 {
   drawerBackgroundColor:'#f0f0e9',
@@ -149,8 +152,10 @@ contentComponent: Drawer
 },
 )
 const Switcher=createSwitchNavigator({
+
   Authenticate:Authenticate,
-  Authenticated:a
+  Authenticated:a,
+
 })
 
 export default createAppContainer(Switcher)
