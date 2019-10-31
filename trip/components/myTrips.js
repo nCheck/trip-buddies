@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { 
-    View,Image,Dimensions ,StyleSheet, AsyncStorage
+    View,Image,Dimensions ,StyleSheet, AsyncStorage, TouchableOpacity
 } from 'react-native';
 import{Card ,CardItem,Container,Body,Header,Subtitle,Title,Button,Text} from 'native-base';
 import Carousel from 'react-native-snap-carousel';
@@ -80,38 +80,40 @@ export default class myTrips extends Component {
     
             </View>
 
+            <TouchableOpacity style={styles.buttonContainer} onPress={ () => this.props.navigation.navigate('TripDetail', { trip : item }) } >
+                <Text>View More</Text>  
+              </TouchableOpacity>  
+
             </View>
         );
     }
     render() {
         console.log(this.state,"mystate")
         return (
-            <Container >
-            
-                <Carousel                  
-                ref={(c) => { this._carousel = c; }}
-                data={this.state.trips}
-                renderItem={this._renderItem}
-                sliderWidth={sliderWidth}
-                // contentContainerCustomStyle={{paddingVertical:10}}
-                containerCustomStyle={{marginTop:15}}
-                // autoplay={true}
-                itemWidth={itemWidth}/>
-            
-<Card style={styles.card}>
-    <CardItem style={styles.cardItem}>
+                <Container >
+                
+                    <Carousel                  
+                    ref={(c) => { this._carousel = c; }}
+                    data={this.state.trips}
+                    renderItem={this._renderItem}
+                    sliderWidth={sliderWidth}
+                    // contentContainerCustomStyle={{paddingVertical:10}}
+                    containerCustomStyle={{marginTop:15}}
+                    // autoplay={true}
+                    itemWidth={itemWidth}/>
+                
+            <Card style={styles.card}>
+                <CardItem style={styles.cardItem}>
 
 
-        <Button  transparent  onPress={()=>this.props.navigation.navigate("Newtrip")} >
-        <Text style={{fontFamily:'Caladea-BoldItalic'}} >
-            Add your trip
-        </Text>
-        </Button>
-    </CardItem>
-</Card>
-
-            
-            </Container>
+                    <Button  transparent  onPress={()=>this.props.navigation.navigate("Newtrip")} >
+                    <Text style={{fontFamily:'Caladea-BoldItalic'}} >
+                        Add your trip
+                    </Text>
+                    </Button>
+                </CardItem>
+            </Card>
+                </Container>
 
         )
     }
@@ -152,5 +154,16 @@ const styles=StyleSheet.create({
         backgroundColor:'black',
         color:'white',
         width:250
-    }
+    },
+    buttonContainer: {
+        marginTop:10,
+        height:45,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom:20,
+        width:250,
+        borderRadius:30,
+        backgroundColor: "#00BFFF",
+      }
 })

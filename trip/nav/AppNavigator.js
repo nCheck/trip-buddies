@@ -61,10 +61,6 @@ const a=createDrawerNavigator({
       drawerLabel:()=>null
     }
   },
-  Login : { screen : LoginView,
-  navigationOptions:{
-    drawerIcon:<Icon type="FontAwesome" name="sign-in" style={{color:"red"}}/>
-  } },
   Home:{screen:home,
   navigationOptions:{
     drawerLabel:"Recommendations",
@@ -80,7 +76,7 @@ const a=createDrawerNavigator({
     screen:myTrips,
     navigationOptions:{
       drawerIcon:<Icon type="AntDesign" name="tago" style={{color:'red'}} />,
-      drawerLabel:"My trips"
+      drawerLabel:"My Trips"
     }
 
   },
@@ -110,7 +106,12 @@ Request:{
     
     drawerIcon:<Icon type="FontAwesome5" name="place-of-worship"style={{color:'red'}} />
   }
-}
+},
+Login : { screen : LoginView,
+navigationOptions:{
+  drawerLabel : "Logout",
+  drawerIcon:<Icon type="FontAwesome" name="sign-in" style={{color:"red"}}/>
+} }
 },
 {
   drawerBackgroundColor:'#f0f0e9',

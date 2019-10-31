@@ -25,6 +25,14 @@ export default class LoginView extends Component {
     }
   }
 
+  async componentWillMount(){
+    var userData =  await AsyncStorage.getItem('user');
+    if ( userData != null ){
+      this.props.navigation.navigate('Home');
+    }
+    
+}
+
   onClickListener = async (viewId) => {
 
     if ( viewId == 'login' ){

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  View,FlatList ,Image,Picker, WebView} from 'react-native';
+import {  View,FlatList ,Image,Picker, WebView , ActivityIndicator , StyleSheet} from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import AppNavigator from './images/AppNavigator';
 import RNPickerSelect from 'react-native-picker-select';
@@ -118,8 +118,8 @@ startLoad = (s)=>{
           else
           {
             return(
-            <View>
-            <Text>Add a new trip</Text>
+              <View style={[styles.container, styles.horizontal]}>
+              <ActivityIndicator size="large" color="#0000ff" />
             </View>
             )
           }
@@ -151,3 +151,16 @@ startLoad = (s)=>{
         );
     }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  }
+})
