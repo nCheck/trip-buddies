@@ -63,6 +63,7 @@ const a=createDrawerNavigator({
   },
   Login : { screen : LoginView,
   navigationOptions:{
+    drawerLabel:"Logout",
     drawerIcon:<Icon type="FontAwesome" name="sign-in" style={{color:"red"}}/>
   } },
   Home:{screen:home,

@@ -17,7 +17,7 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native';
-import A from './nav/AppNavigator';
+import A from './images/AppNavigator';
 
 const trips = [
   {name:"Heaven on Earth",
